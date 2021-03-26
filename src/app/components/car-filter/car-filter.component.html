@@ -1,0 +1,44 @@
+<div class="row mb-2">
+  <ul class="list-group" style="margin-top: 20px">
+    <li class="list-group-item">
+      <select
+        [(ngModel)]="brandFilter"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option
+          *ngFor="let brand of brands"
+          [value]="brand.brandId"
+          selected="{{ getSelectedBrand(brand.brandId) }}"
+        >
+          {{ brand.brandName }}
+        </option>
+      </select>
+    </li>
+    <li class="list-group-item">
+      <select
+        [(ngModel)]="colorFilter"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option
+          *ngFor="let color of colors"
+          [value]="color.colorId"
+          [selected]="getSelectedColor(color.colorId)"
+        >
+          {{ color.colorName }}
+        </option>
+      </select>
+    </li>
+  </ul>
+  <div class="col mb-2" style="margin-top: 20px">
+    <a
+      routerLink="/cars/filter/{{ brandFilter }}/{{ colorFilter }}"
+      class="btn btn-warning"
+      >Filtrele</a
+    >
+  </div>
+  <div class="col mb-2" style="margin-top: 20px">
+    <a routerLink="/cars" class="btn btn-danger">Temizle</a>
+  </div>
+</div>

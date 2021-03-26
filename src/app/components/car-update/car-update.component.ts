@@ -47,6 +47,7 @@ export class CarUpdateComponent implements OnInit {
 
   update() {
     if (this.carUpdateForm.valid) {
+      console.log(this.carUpdateForm.value);
       let carModel = Object.assign({}, this.carUpdateForm.value);
       this.carService.update(carModel).subscribe(
         (response) => {

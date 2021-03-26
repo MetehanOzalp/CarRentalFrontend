@@ -27,7 +27,7 @@ export class CarUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
-        this.carId = params['carId'];
+        this.carId = parseInt(params['carId']);
         this.createCarUpdateForm();
       }
     });

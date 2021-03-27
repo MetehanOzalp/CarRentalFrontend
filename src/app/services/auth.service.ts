@@ -5,6 +5,7 @@ import { Loginmodel } from '../models/loginModel';
 import { RegisterModel } from '../models/registerModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,10 @@ import { TokenModel } from '../models/tokenModel';
 export class AuthService {
   apiUrl = 'https://localhost:44326/api/auth/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {}
 
   login(loginModel: Loginmodel): Observable<SingleResponseModel<TokenModel>> {
     let newPath = this.apiUrl + 'login';
@@ -33,7 +37,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('token')) {
+    if (this.localStorageService.get('token')) {
       return true;
     } else {
       return false;

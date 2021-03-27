@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +44,16 @@ export class LoginComponent implements OnInit {
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
           this.localStorageService.set('token', response.data.token);
+          this.localStorageService.set('email', loginModel.email);
+          this.router.navigate(['']);
+          window.location.reload();
         },
         (responseError) => {
           this.toastrService.error(responseError.error.message, 'Hata');
         }
       );
+    } else {
+      this.toastrService.error('Lütfen alanları doldurunuz', 'Hata');
     }
   }
 }

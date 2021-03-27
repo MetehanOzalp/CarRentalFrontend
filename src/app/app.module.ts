@@ -27,6 +27,7 @@ import { CarUpdateComponent } from './components/car-update/car-update.component
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { RegisterComponent } from './components/register/register.component';
     CarUpdateComponent,
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

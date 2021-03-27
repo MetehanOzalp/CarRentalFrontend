@@ -40,10 +40,18 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       let registerModel = Object.assign({}, this.registerForm.value);
-      this.authService.register(registerModel).subscribe((response) => {
-        this.toastrService.success(response.message, 'Başarılı');
-        this.localStorageService.set('token', response.data.token);
-      });
+      this.authService.register(registerModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          this.localStorageService.set('token', response.data.token);
+          this.localStorageService.set('email', registerModel.email);
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error, 'Hata');
+        }
+      );
+    } else {
+      this.toastrService.error('Kullanıcı bilgileri eksik', 'Hata');
     }
   }
 }

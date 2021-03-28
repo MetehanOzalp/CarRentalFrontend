@@ -5,7 +5,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -21,7 +23,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +48,9 @@ export class RegisterComponent implements OnInit {
           this.toastrService.success(response.message, 'Başarılı');
           this.localStorageService.set('token', response.data.token);
           this.localStorageService.set('email', registerModel.email);
+          timer(25).subscribe((p) => {
+            window.location.href = '/';
+          });
         },
         (responseError) => {
           this.toastrService.error(responseError.error, 'Hata');

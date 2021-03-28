@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -45,8 +46,9 @@ export class LoginComponent implements OnInit {
           this.toastrService.success(response.message, 'Başarılı');
           this.localStorageService.set('token', response.data.token);
           this.localStorageService.set('email', loginModel.email);
-          this.router.navigate(['']);
-          window.location.reload();
+          timer(25).subscribe((p) => {
+            window.location.href = '/';
+          });
         },
         (responseError) => {
           this.toastrService.error(responseError.error.message, 'Hata');

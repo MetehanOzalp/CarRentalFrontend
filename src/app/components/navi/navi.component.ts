@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -46,7 +47,8 @@ export class NaviComponent implements OnInit {
 
   signOut() {
     this.localStorageService.clean();
-    this.router.navigate(['']);
-    window.location.reload();
+    timer(25).subscribe((p) => {
+      window.location.href = '/';
+    });
   }
 }

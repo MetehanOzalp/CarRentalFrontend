@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 import { ListResponseModel } from '../models/listResponseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -14,5 +15,12 @@ export class CustomerService {
 
   getCustomers(): Observable<ListResponseModel<Customer>> {
     return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
+  }
+
+  getCustomerByUserId(userId: number) {
+    let newPath =
+      'https://localhost:44326/api/customers/getcustomerdetailbyuserid?' +
+      userId;
+    return this.httpClient.get<SingleResponseModel<Customer>>(newPath);
   }
 }

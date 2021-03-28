@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
@@ -8,6 +8,7 @@ import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-rental',
@@ -16,12 +17,15 @@ import { RentalService } from 'src/app/services/rental.service';
   providers: [DatePipe],
 })
 export class RentalComponent implements OnInit {
-  car: Car;
+  //car: Car;
   minDate: string | null;
   maxDate: string | null;
   customers: Customer[];
+  customer: Customer;
+  userId: number;
   rentals: Rental[] = [];
   dataLoaded = false;
+  @Input() car: Car;
   rental: Rental = {
     id: 0,
     carId: 0,
@@ -46,14 +50,16 @@ export class RentalComponent implements OnInit {
     private customerService: CustomerService,
     private router: Router,
     private datePipe: DatePipe,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
+    this.getCustomer(this.userId);
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarDetail(params['carId']);
-        this.getCustomers();
         this.CheckStatus(params['carId']);
         this.getRentalsByCarId(params['carId']);
       }
@@ -87,9 +93,17 @@ export class RentalComponent implements OnInit {
     });
   }
 
-  getCustomers() {
-    this.customerService.getCustomers().subscribe((response) => {
-      this.customers = response.data;
+  getUser() {
+    this.userService
+      .getUserByMail(localStorage.getItem('email'))
+      .subscribe((response) => {
+        this.userId = response.data.id;
+      });
+  }
+
+  getCustomer(userId: number) {
+    this.customerService.getCustomerByUserId(userId).subscribe((response) => {
+      this.customer = response.data;
     });
   }
 

@@ -16,6 +16,7 @@ export class CarDetailComponent implements OnInit {
   car: Car;
   getCarId: number;
   images: CarImage[];
+  rentable: boolean;
   baseUrl: string = 'https://localhost:44326/';
   constructor(
     private carService: CarService,
@@ -28,6 +29,7 @@ export class CarDetailComponent implements OnInit {
       if (params['id']) {
         this.getCarDetails(params['id']);
         this.getImagesByCarId(params['id']);
+        this.CheckStatus(params['id']);
       }
     });
   }
@@ -52,5 +54,11 @@ export class CarDetailComponent implements OnInit {
     } else {
       return 'carousel-item';
     }
+  }
+
+  CheckStatus(carId: number) {
+    this.carService.getCarByCarId(carId).subscribe((response) => {
+      this.rentable = response.data[response.data.length - 1].status;
+    });
   }
 }

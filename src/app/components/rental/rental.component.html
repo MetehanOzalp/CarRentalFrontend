@@ -1,19 +1,15 @@
-<button
-  *ngIf="rentable"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
-  type="button"
-  class="btn btn-primary"
->
-  Kirala
-</button>
-<div style="margin-top: 10px" *ngIf="!rentable" class="alert alert-danger">
-  Bu araç zaten kiralanmış
+<div class="d-grid gap-2">
+  <button
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    type="button"
+    class="btn btn-dark text-center"
+  >
+    Kirala
+  </button>
 </div>
-
 <!-- Modal -->
 <div
-  *ngIf="car"
   class="modal fade"
   id="exampleModal"
   tabindex="-1"
@@ -35,7 +31,7 @@
           ></button>
         </div>
       </div>
-      <div *ngIf="car" class="modal-body">
+      <div class="modal-body">
         <div class="daily-price">
           <div class="mb-3 row">
             <div class="col-md-3">
@@ -95,18 +91,10 @@
             <div class="col-md-9">
               <select
                 #selectCustomer
-                (change)="setCustomerId(selectCustomer.value)"
+                (change)="setCustomerId(customer.id)"
                 class="form-select"
                 aria-label="Default select example"
-              >
-                <option selected>Lütfen bir müşteri seçin</option>
-                <option
-                  *ngFor="let customer of customers"
-                  [value]="customer.id"
-                >
-                  {{ customer.companyName }}
-                </option>
-              </select>
+              ></select>
             </div>
           </div>
         </div>

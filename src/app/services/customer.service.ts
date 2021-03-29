@@ -19,8 +19,8 @@ export class CustomerService {
 
   getCustomerByUserId(userId: number) {
     let newPath =
-      'https://localhost:44326/api/customers/getcustomerdetailbyuserid?' +
+      'https://localhost:44326/api/customers/getcustomerdetailbyuserid?userId=' +
       userId;
-    return this.httpClient.get<SingleResponseModel<Customer>>(newPath);
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 }

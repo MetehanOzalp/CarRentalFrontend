@@ -56,7 +56,6 @@ export class RentalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.getCustomer(this.userId);
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarDetail(params['carId']);
@@ -98,18 +97,19 @@ export class RentalComponent implements OnInit {
       .getUserByMail(localStorage.getItem('email'))
       .subscribe((response) => {
         this.userId = response.data.id;
+        this.getCustomer(this.userId);
       });
   }
 
   getCustomer(userId: number) {
     this.customerService.getCustomerByUserId(userId).subscribe((response) => {
-      this.customer = response.data;
+      this.customer = response.data[0];
     });
   }
 
   addRental() {
     let RentalModel = {
-      customerId: this.customerId,
+      customerId: this.customer.id,
       carId: this.car.id,
       rentDate: this.rentDate,
       returnDate: this.returnDate,
@@ -125,10 +125,6 @@ export class RentalComponent implements OnInit {
     this.carService.getCarByCarId(carId).subscribe((response) => {
       this.rentable = response.data[response.data.length - 1].status;
     });
-  }
-
-  setCustomerId(customerId: any) {
-    this.customerId = +customerId;
   }
 
   onChangeEvent(event: any) {

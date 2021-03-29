@@ -29,7 +29,7 @@ export class CarDetailComponent implements OnInit {
       if (params['id']) {
         this.getCarDetails(params['id']);
         this.getImagesByCarId(params['id']);
-        this.CheckStatus(params['id']);
+        //this.CheckStatus(params['id']);
       }
     });
   }
@@ -38,6 +38,7 @@ export class CarDetailComponent implements OnInit {
     this.carService.getCarByCarId(carId).subscribe((response) => {
       this.cars = response.data;
       this.car = response.data[0];
+      this.rentable = response.data[0].status;
       this.getCarId = response.data[0].id;
     });
   }

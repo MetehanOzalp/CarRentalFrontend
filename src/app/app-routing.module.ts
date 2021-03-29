@@ -22,7 +22,11 @@ const routes: Routes = [
   { path: 'cars/brand/:brandId/color/:colorId', component: CarComponent },
   { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
   { path: 'rental/:carId', component: RentalComponent },
-  { path: 'cars/rental/payment/:rental', component: PaymentComponent },
+  {
+    path: 'cars/rental/payment/:rental',
+    component: PaymentComponent,
+    canActivate: [LoginGuard],
+  },
   { path: 'cars/add', component: CarAddComponent, canActivate: [LoginGuard] },
   {
     path: 'colors/add',

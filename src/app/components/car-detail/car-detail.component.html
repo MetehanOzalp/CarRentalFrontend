@@ -185,13 +185,6 @@
     <li class="list-group-item">Model Yılı: {{ car.modelYear }}</li>
     <li class="list-group-item">Açıklama : {{ car.description }}</li>
     <li class="list-group-item">Fiyat: {{ car.dailyPrice }} ₺</li>
+    <li class="list-group-item"><app-rental [car]="car"></app-rental></li>
   </ul>
-</div>
-<div class="card-body d-grid gap-2 mx-auto">
-  <div class="btn-group me-2" *ngIf="rentable">
-    <app-rental [car]="car"></app-rental>
-  </div>
-  <div style="margin-top: 10px" *ngIf="!rentable" class="alert alert-danger">
-    Bu araç zaten kiralanmış
-  </div>
 </div>

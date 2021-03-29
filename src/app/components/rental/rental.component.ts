@@ -7,6 +7,7 @@ import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -42,6 +43,7 @@ export class RentalComponent implements OnInit {
   customerId: number;
   rentable: boolean = false;
   firstDateSelected: boolean = false;
+  email: string;
 
   constructor(
     private rentalService: RentalService,
@@ -51,10 +53,13 @@ export class RentalComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private localStorageService: LocalStorageService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.email = this.localStorageService.get('email');
     this.getUser();
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
@@ -93,12 +98,12 @@ export class RentalComponent implements OnInit {
   }
 
   getUser() {
-    this.userService
-      .getUserByMail(localStorage.getItem('email'))
-      .subscribe((response) => {
+    if (this.email) {
+      this.userService.getUserByMail(this.email).subscribe((response) => {
         this.userId = response.data.id;
         this.getCustomer(this.userId);
       });
+    }
   }
 
   getCustomer(userId: number) {
@@ -108,17 +113,28 @@ export class RentalComponent implements OnInit {
   }
 
   addRental() {
-    let RentalModel = {
-      customerId: this.customer.id,
-      carId: this.car.id,
-      rentDate: this.rentDate,
-      returnDate: this.returnDate,
-    };
-    this.router.navigate(['cars/rental/payment/', JSON.stringify(RentalModel)]);
-    this.toastr.success(
-      'Ödeme sayfasına yönlendiriliyorsunuz.',
-      'Kiralama başarılı'
-    );
+    if (this.customer) {
+      let RentalModel = {
+        customerId: this.customer.id,
+        carId: this.car.id,
+        rentDate: this.rentDate,
+        returnDate: this.returnDate,
+      };
+      this.router.navigate([
+        'cars/rental/payment/',
+        JSON.stringify(RentalModel),
+      ]);
+      this.toastr.success(
+        'Ödeme sayfasına yönlendiriliyorsunuz.',
+        'Kiralama başarılı'
+      );
+    } else {
+      this.router.navigate(['login']);
+      this.toastrService.warning(
+        'Araç kiralamadan önce sisteme giriş yapmalısınız!',
+        'Dikkat'
+      );
+    }
   }
 
   CheckStatus(carId: number) {

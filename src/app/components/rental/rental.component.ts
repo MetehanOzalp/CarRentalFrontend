@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
   providers: [DatePipe],
 })
 export class RentalComponent implements OnInit {
-  //car: Car;
+  @Input() car: Car;
   minDate: string | null;
   maxDate: string | null;
   customers: Customer[];
@@ -26,7 +26,6 @@ export class RentalComponent implements OnInit {
   userId: number;
   rentals: Rental[] = [];
   dataLoaded = false;
-  @Input() car: Car;
   rental: Rental = {
     id: 0,
     carId: 0,
@@ -41,7 +40,6 @@ export class RentalComponent implements OnInit {
   rentDate: Date;
   returnDate: Date;
   customerId: number;
-  rentable: boolean = false;
   firstDateSelected: boolean = false;
   email: string;
 
@@ -64,7 +62,6 @@ export class RentalComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarDetail(params['carId']);
-        this.CheckStatus(params['carId']);
         this.getRentalsByCarId(params['carId']);
       }
     });
@@ -137,11 +134,11 @@ export class RentalComponent implements OnInit {
     }
   }
 
-  CheckStatus(carId: number) {
-    this.carService.getCarByCarId(carId).subscribe((response) => {
-      this.rentable = response.data[response.data.length - 1].status;
-    });
-  }
+  // CheckStatus(carId: number) {
+  //   this.carService.getCarByCarId(carId).subscribe((response) => {
+  //     this.rentable = response.data[response.data.length - 1].status;
+  //   });
+  // }
 
   onChangeEvent(event: any) {
     this.minDate = event.target.value;

@@ -7,6 +7,16 @@
     <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
     <img src="https://img.icons8.com/color/48/000000/maestro.png" />
   </div>
+  <select
+    (change)="cardSelectChangeHandler($event)"
+    class="form-select"
+    aria-label="Default select example"
+  >
+    <option selected>Kredi Kartları</option>
+    <option *ngFor="let cards of cards" value="{{ cards.id }}">
+      Kayıtlı Kart Numaraları : {{ cards.cardNumber }}
+    </option>
+  </select>
   <div class="mb-3 row">
     <div class="col-md-4">
       <label for="cardNumber" class="form-label"
@@ -15,7 +25,7 @@
     </div>
     <div class="col-md-8">
       <input
-        [(ngModel)]="cardNumber"
+        [(ngModel)]="card.cardNumber"
         type="text"
         class="form-control"
         id="cardNumber"
@@ -29,7 +39,7 @@
     </div>
     <div class="col-md-8">
       <input
-        [(ngModel)]="firstName"
+        [(ngModel)]="card.firstName"
         type="text"
         class="form-control"
         id="firstName"
@@ -43,7 +53,7 @@
     </div>
     <div class="col-md-8">
       <input
-        [(ngModel)]="lastName"
+        [(ngModel)]="card.lastName"
         type="text"
         class="form-control"
         id="lastName"
@@ -56,7 +66,7 @@
       <div class="mb-3">
         <label for="cvv" class="form-label">Güvenlik kodu : </label>
         <input
-          [(ngModel)]="cVV"
+          [(ngModel)]="card.cvv"
           type="text"
           class="form-control"
           id="cvv"
@@ -70,12 +80,26 @@
           >Son Kullanım Tarihi :
         </label>
         <input
-          [(ngModel)]="expirationDate"
+          [(ngModel)]="card.expirationDate"
           type="text"
           class="form-control"
           id="expirationDate"
           placeholder="örn: 20/27"
         />
+      </div>
+    </div>
+    <div class="form-group w-100">
+      <div class="checkbox mb-3">
+        <label>
+          <input
+            type="checkbox"
+            [(ngModel)]="saveCard"
+            id="saveCard"
+            name="saveCard"
+            value="saveCard"
+          />
+          Save Card
+        </label>
       </div>
     </div>
   </div>

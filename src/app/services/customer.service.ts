@@ -17,7 +17,7 @@ export class CustomerService {
     return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
   }
 
-  getCustomerByUserId(userId: number) {
+  getCustomerByUserId(userId: number): Observable<ListResponseModel<Customer>> {
     let newPath =
       'https://localhost:44326/api/customers/getcustomerdetailbyuserid?userId=' +
       userId;

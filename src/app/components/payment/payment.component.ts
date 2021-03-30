@@ -68,7 +68,14 @@ export class PaymentComponent implements OnInit {
       let paymentModel = Object.assign({}, this.paymentAddForm.value);
       this.paymentService.addPayment(paymentModel).subscribe((response) => {
         this.toastrService.success(response.message, 'Başarılı');
-        this.rentalService.addRental(this.rental);
+        this.rentalService.addRental(this.rental).subscribe(
+          (response) => {
+            this.toastrService.success(response.message, 'Başarılı');
+          },
+          (responseError) => {
+            this.toastrService.error(responseError.error.message, 'Hata');
+          }
+        );
         if (this.saveCard) {
           this.addCreditCard();
         }

@@ -57,6 +57,16 @@
             </div>
           </div>
         </form>
+        <div class="mb-3">
+          <label for="findeksScore">Findeks Puanınız</label>
+          <input
+            type="number"
+            id="findeksScore"
+            disabled="true"
+            class="form-control"
+            [(ngModel)]="customer.findeksScore"
+          />
+        </div>
       </div>
       <div class="card-footer">
         <button class="btn btn-fill btn-primary" (click)="update()">

@@ -6,7 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Customer } from 'src/app/models/customer';
 import { User } from 'src/app/models/user';
+import { CustomerService } from 'src/app/services/customer.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -23,12 +25,19 @@ export class ProfileComponent implements OnInit {
     email: '',
     password: '',
   };
+  customer: Customer = {
+    id: 0,
+    userId: 0,
+    companyName: '',
+    findeksScore: 1,
+  };
   userId: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private userService: UserService,
+    private customerService: CustomerService,
     private localStorageService: LocalStorageService
   ) {}
 
@@ -69,6 +78,14 @@ export class ProfileComponent implements OnInit {
       .subscribe((response) => {
         this.user = response.data;
         this.userId = response.data.id;
+        this.getCustomerByUserId(this.userId);
       });
+  }
+
+  getCustomerByUserId(userId: number) {
+    this.customerService.getCustomerByUserId(userId).subscribe((response) => {
+      this.customer = response.data[0];
+      console.log(this.customer);
+    });
   }
 }

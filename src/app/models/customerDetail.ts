@@ -3,4 +3,5 @@ export interface CustomerDetail {
   name: string;
   email: string;
   companyName: string;
+  findeksScore: number;
 }

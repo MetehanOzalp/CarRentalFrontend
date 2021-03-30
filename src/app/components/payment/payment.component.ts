@@ -20,11 +20,6 @@ import {
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  //cardNumber: string;
-  //firstName: string;
-  //lastName: string;
-  //expirationDate: string;
-  //cVV: number;
   rental: Rental;
   card: CreditCard = {
     customerId: 0,

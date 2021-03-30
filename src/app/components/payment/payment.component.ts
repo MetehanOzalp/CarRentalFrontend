@@ -86,9 +86,7 @@ export class PaymentComponent implements OnInit {
       expirationDate: this.card.expirationDate,
       cvv: this.card.cvv,
     };
-    console.log(newCreditCard);
     if (!this.cardAvailable()) {
-      console.log(newCreditCard);
       this.creditCardService
         .addCreditCard(newCreditCard)
         .subscribe((response) => {
@@ -101,8 +99,6 @@ export class PaymentComponent implements OnInit {
 
   cardAvailable(): boolean {
     for (let i = 0; i < this.cards.length; i++) {
-      console.log(this.cards.length);
-      console.log(this.cards[i].cardNumber);
       if (this.card.cardNumber == this.cards[i].cardNumber) {
         return true;
       }

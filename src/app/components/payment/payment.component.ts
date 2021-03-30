@@ -7,6 +7,12 @@ import { Rental } from 'src/app/models/rental';
 import { CreditCardService } from 'src/app/services/credit-card.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -14,11 +20,11 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  cardNumber: string;
-  firstName: string;
-  lastName: string;
-  expirationDate: string;
-  cVV: number;
+  //cardNumber: string;
+  //firstName: string;
+  //lastName: string;
+  //expirationDate: string;
+  //cVV: number;
   rental: Rental;
   card: CreditCard = {
     customerId: 0,
@@ -30,6 +36,7 @@ export class PaymentComponent implements OnInit {
   };
   cards: CreditCard[];
   saveCard: boolean;
+  paymentAddForm: FormGroup;
 
   constructor(
     private rentalService: RentalService,
@@ -37,6 +44,7 @@ export class PaymentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private creditCardService: CreditCardService,
     private toastrService: ToastrService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) {}
 
@@ -44,41 +52,48 @@ export class PaymentComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['rental']) {
         this.rental = JSON.parse(params['rental']);
+        this.createPaymentAddForm();
         this.getCreditCardsByCustomerId(this.rental.customerId);
       }
     });
   }
 
-  addRental() {
-    let newPayment: Payment = {
-      cardNumber: this.card.cardNumber,
-      firstName: this.card.firstName,
-      lastName: this.card.lastName,
-      expirationDate: this.card.expirationDate,
-      cVV: this.card.cvv,
-    };
-    this.paymentService.addPayment(newPayment).subscribe((response) => {
-      this.toastrService.success(response.message, 'Başarılı');
-      this.rentalService.addRental(this.rental);
-      if (this.saveCard) {
-        this.addCreditCard();
-      }
+  createPaymentAddForm() {
+    this.paymentAddForm = this.formBuilder.group({
+      cardNumber: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      expirationDate: ['', Validators.required],
+      cVV: ['', Validators.required],
     });
+  }
 
-    this.router.navigate(['cars/']);
+  addRental() {
+    if (this.paymentAddForm.valid) {
+      let paymentModel = Object.assign({}, this.paymentAddForm.value);
+      this.paymentService.addPayment(paymentModel).subscribe((response) => {
+        this.toastrService.success(response.message, 'Başarılı');
+        this.rentalService.addRental(this.rental);
+        if (this.saveCard) {
+          this.addCreditCard();
+        }
+        this.router.navigate(['cars/']);
+      });
+    }
   }
 
   addCreditCard() {
     let newCreditCard: CreditCard = {
-      customerId: this.card.customerId,
+      customerId: this.cards[0].customerId,
       cardNumber: this.card.cardNumber,
       firstName: this.card.firstName,
       lastName: this.card.lastName,
       expirationDate: this.card.expirationDate,
       cvv: this.card.cvv,
     };
-
-    if (!this.cardAvailable) {
+    console.log(newCreditCard);
+    if (!this.cardAvailable()) {
+      console.log(newCreditCard);
       this.creditCardService
         .addCreditCard(newCreditCard)
         .subscribe((response) => {
@@ -91,6 +106,8 @@ export class PaymentComponent implements OnInit {
 
   cardAvailable(): boolean {
     for (let i = 0; i < this.cards.length; i++) {
+      console.log(this.cards.length);
+      console.log(this.cards[i].cardNumber);
       if (this.card.cardNumber == this.cards[i].cardNumber) {
         return true;
       }
@@ -103,7 +120,6 @@ export class PaymentComponent implements OnInit {
       .getCreditCardsByCustomerId(customerId)
       .subscribe((response) => {
         this.cards = response.data;
-        this.card = response.data[0];
       });
   }
 

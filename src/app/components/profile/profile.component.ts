@@ -85,7 +85,6 @@ export class ProfileComponent implements OnInit {
   getCustomerByUserId(userId: number) {
     this.customerService.getCustomerByUserId(userId).subscribe((response) => {
       this.customer = response.data[0];
-      console.log(this.customer);
     });
   }
 }

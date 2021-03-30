@@ -7,6 +7,6 @@ export interface Car {
   dailyPrice: number;
   imagePath: string;
   description: string;
-  minFindexsScore: number;
+  minFindeksScore: number;
   status: boolean;
 }

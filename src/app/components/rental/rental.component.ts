@@ -121,10 +121,7 @@ export class RentalComponent implements OnInit {
         'cars/rental/payment/',
         JSON.stringify(RentalModel),
       ]);
-      this.toastr.success(
-        'Ödeme sayfasına yönlendiriliyorsunuz.',
-        'Kiralama başarılı'
-      );
+      this.toastr.success('Ödeme sayfasına yönlendiriliyorsunuz.', 'Başarılı');
     } else {
       this.router.navigate(['login']);
       this.toastrService.warning(

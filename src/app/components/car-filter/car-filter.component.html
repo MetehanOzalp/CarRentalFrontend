@@ -6,11 +6,8 @@
         class="form-select"
         aria-label="Default select example"
       >
-        <option
-          *ngFor="let brand of brands"
-          [value]="brand.brandId"
-          selected="{{ getSelectedBrand(brand.brandId) }}"
-        >
+        <option value="0">Tüm Markalar</option>
+        <option *ngFor="let brand of brands" [value]="brand.brandId">
           {{ brand.brandName }}
         </option>
       </select>
@@ -21,11 +18,8 @@
         class="form-select"
         aria-label="Default select example"
       >
-        <option
-          *ngFor="let color of colors"
-          [value]="color.colorId"
-          [selected]="getSelectedColor(color.colorId)"
-        >
+        <option value="0">Tüm Renkler</option>
+        <option *ngFor="let color of colors" [value]="color.colorId">
           {{ color.colorName }}
         </option>
       </select>

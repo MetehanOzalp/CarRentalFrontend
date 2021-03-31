@@ -17,8 +17,8 @@ export class CarFilterComponent implements OnInit {
 
   brands: Brand[];
   colors: Color[];
-  brandFilter: number;
-  colorFilter: number;
+  brandFilter: number = 0;
+  colorFilter: number = 0;
 
   ngOnInit(): void {
     this.getBrands();

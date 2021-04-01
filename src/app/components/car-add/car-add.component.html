@@ -22,27 +22,25 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="brandId">Marka Id</label>
+            <label for="brands">Marka</label>
             <div class="form-group">
-              <input
-                type="number"
-                id="brandId"
-                formControlName="brandId"
-                class="form-control"
-                placeholder="Marka id"
-              />
+              <select class="form-select" id="brands" formControlName="brandId">
+                <option value="">Marka seçiniz</option>
+                <option *ngFor="let brand of brands" [value]="brand.brandId">
+                  {{ brand.brandName }}
+                </option>
+              </select>
             </div>
           </div>
           <div class="mb-3">
-            <label for="colorId">Color Id</label>
+            <label for="colors">Renk</label>
             <div class="form-group">
-              <input
-                type="number"
-                id="colorId"
-                formControlName="colorId"
-                class="form-control"
-                placeholder="Renk id"
-              />
+              <select class="form-select" id="colors" formControlName="colorId">
+                <option value="">Renk seçiniz</option>
+                <option *ngFor="let color of colors" [value]="color.colorId">
+                  {{ color.colorName }}
+                </option>
+              </select>
             </div>
           </div>
           <div class="mb-3">
@@ -78,6 +76,18 @@
                 formControlName="descriptions"
                 class="form-control"
                 placeholder="Açıklama"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="minFindeksScore">Gerekli findeks puanı</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="minFindeksScore"
+                formControlName="minFindeksScore"
+                class="form-control"
+                placeholder="Findeks puanı"
               />
             </div>
           </div>

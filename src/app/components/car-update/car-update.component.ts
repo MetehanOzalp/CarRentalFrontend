@@ -8,6 +8,10 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car-update',
@@ -17,10 +21,14 @@ import { ActivatedRoute } from '@angular/router';
 export class CarUpdateComponent implements OnInit {
   carUpdateForm: FormGroup;
   carId: number;
+  brands: Brand[] = [];
+  colors: Color[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private carService: CarService,
+    private brandService: BrandService,
+    private colorService: ColorService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -30,6 +38,8 @@ export class CarUpdateComponent implements OnInit {
       if (params['carId']) {
         this.carId = parseInt(params['carId']);
         this.createCarUpdateForm();
+        this.getBrands();
+        this.getColors();
       }
     });
   }
@@ -50,6 +60,8 @@ export class CarUpdateComponent implements OnInit {
   update() {
     if (this.carUpdateForm.valid) {
       let carModel = Object.assign({}, this.carUpdateForm.value);
+      carModel.brandId = Number(carModel.brandId);
+      carModel.colorId = Number(carModel.colorId);
       this.carService.update(carModel).subscribe(
         (response) => {
           this.toastrService.success(response.message), 'Başarılı';
@@ -68,5 +80,17 @@ export class CarUpdateComponent implements OnInit {
     } else {
       this.toastrService.error('Araç bilgileri eksik', 'Hata');
     }
+  }
+
+  getBrands() {
+    this.brandService.getBrands().subscribe((response) => {
+      this.brands = response.data;
+    });
+  }
+
+  getColors() {
+    this.colorService.getColors().subscribe((response) => {
+      this.colors = response.data;
+    });
   }
 }

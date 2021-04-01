@@ -93,24 +93,15 @@ export class PaymentComponent implements OnInit {
       expirationDate: this.card.expirationDate,
       cvv: this.card.cvv,
     };
-    if (!this.cardAvailable()) {
-      this.creditCardService
-        .addCreditCard(newCreditCard)
-        .subscribe((response) => {
-          this.toastrService.success(response.message, 'Başarılı');
-        });
-    } else {
-      this.toastrService.warning('Bu kart numarası zaten kayıtlı', 'Dikkat');
-    }
-  }
 
-  cardAvailable(): boolean {
-    for (let i = 0; i < this.cards.length; i++) {
-      if (this.card.cardNumber == this.cards[i].cardNumber) {
-        return true;
+    this.creditCardService.addCreditCard(newCreditCard).subscribe(
+      (response) => {
+        this.toastrService.success(response.message, 'Başarılı');
+      },
+      (responseError) => {
+        this.toastrService.warning(responseError.error.message, 'Dikkat');
       }
-    }
-    return false;
+    );
   }
 
   getCreditCardsByCustomerId(customerId: number) {

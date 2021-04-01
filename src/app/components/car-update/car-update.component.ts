@@ -43,6 +43,7 @@ export class CarUpdateComponent implements OnInit {
       modelYear: ['', Validators.required],
       dailyPrice: ['', Validators.required],
       descriptions: ['', Validators.required],
+      minFindeksScore: ['', Validators.required],
     });
   }
 

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
     <a class="navbar-brand" href="#">Car Rental</a>
     <button
       class="navbar-toggler"
@@ -29,11 +29,18 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Dropdown
+            Yetkili İşlemleri
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="cars/add">Araç Ekle</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="brands/add">Marka Ekle</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="colors/add">Renk Ekle</a>
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
@@ -68,7 +75,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Giriş Yap veya Üye Ol
+              Giriş Yap veya Kayıt Ol
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" routerLink="login">Giriş yap</a></li>

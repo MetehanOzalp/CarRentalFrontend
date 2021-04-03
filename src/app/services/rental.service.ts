@@ -28,4 +28,9 @@ export class RentalService {
     let newPath = this.apiUrl + 'rentals/getrentaldetails?carId=' + carId;
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
+
+  isRentable(rental: Rental): Observable<ResponseModel> {
+    let newPath = this.apiUrl + 'rentals/isRentable';
+    return this.httpClient.post<ResponseModel>(newPath, rental);
+  }
 }

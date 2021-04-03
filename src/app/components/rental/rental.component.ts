@@ -116,12 +116,23 @@ export class RentalComponent implements OnInit {
         carId: this.car.id,
         rentDate: this.rentDate,
         returnDate: this.returnDate,
+        brandName: '',
+        carName: '',
+        userName: '',
+        customerName: '',
       };
-      this.router.navigate([
-        'cars/rental/payment/',
-        JSON.stringify(RentalModel),
-      ]);
-      this.toastr.success('Ödeme sayfasına yönlendiriliyorsunuz.');
+      this.rentalService.isRentable(RentalModel).subscribe(
+        (response) => {
+          this.router.navigate([
+            'cars/rental/payment/',
+            JSON.stringify(RentalModel),
+          ]);
+          this.toastr.success('Ödeme sayfasına yönlendiriliyorsunuz.');
+        },
+        (responseError) => {
+          this.toastr.error(responseError.error.message, 'Hata');
+        }
+      );
     } else {
       this.router.navigate(['login']);
       this.toastrService.warning(

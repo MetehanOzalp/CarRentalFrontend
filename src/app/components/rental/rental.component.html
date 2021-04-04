@@ -88,6 +88,22 @@
             </div>
           </div>
         </div>
+        <div class="totalAmount">
+          <div class="mb-3 row">
+            <div class="col-md-3">
+              <label for="totalAmount" class="form-label">Toplam Ücret:</label>
+            </div>
+            <div class="col-md-9">
+              <input
+                disabled="true"
+                type="number"
+                class="form-control"
+                id="totalAmount"
+                placeholder="{{ calculateTotalPrice() | currency: '₺' }}"
+              />
+            </div>
+          </div>
+        </div>
         <div class="modal-footer">
           <button
             type="button"

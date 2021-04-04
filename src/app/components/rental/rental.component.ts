@@ -37,8 +37,8 @@ export class RentalComponent implements OnInit {
     rentDate: new Date(),
     returnDate: new Date(),
   };
-  rentDate: Date;
-  returnDate: Date;
+  rentDate: Date = new Date();
+  returnDate: Date = new Date();
   customerId: number;
   firstDateSelected: boolean = false;
   email: string;
@@ -151,5 +151,14 @@ export class RentalComponent implements OnInit {
   onChangeEvent(event: any) {
     this.minDate = event.target.value;
     this.firstDateSelected = true;
+  }
+
+  calculateTotalPrice() {
+    var startDate = new Date(this.rentDate);
+    var finishDay = new Date(this.returnDate);
+    var calculatedTotalPrice =
+      ((finishDay.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24) *
+      this.car.dailyPrice;
+    return calculatedTotalPrice;
   }
 }

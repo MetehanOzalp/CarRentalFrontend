@@ -79,6 +79,7 @@
                 disabled="{{ !firstDateSelected }}"
                 min="{{ minDate }}"
                 max="{{ maxDate }}"
+                (change)="lastDateSelect()"
                 [(ngModel)]="returnDate"
                 type="date"
                 class="form-control"
@@ -88,7 +89,7 @@
             </div>
           </div>
         </div>
-        <div class="totalAmount">
+        <div class="totalAmount" *ngIf="lastDateSelected">
           <div class="mb-3 row">
             <div class="col-md-3">
               <label for="totalAmount" class="form-label">Toplam Ücret:</label>

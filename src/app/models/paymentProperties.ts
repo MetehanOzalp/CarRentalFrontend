@@ -1,5 +1,5 @@
-export interface Payment {
-  paymentId?: number;
+export interface PaymentProperties {
+  id?: number;
   cardNumber: string;
   firstName: string;
   lastName: string;

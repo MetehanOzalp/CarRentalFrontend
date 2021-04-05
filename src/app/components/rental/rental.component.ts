@@ -41,6 +41,7 @@ export class RentalComponent implements OnInit {
   returnDate: Date = new Date();
   customerId: number;
   firstDateSelected: boolean = false;
+  lastDateSelected: boolean = false;
   email: string;
 
   constructor(
@@ -123,11 +124,18 @@ export class RentalComponent implements OnInit {
       };
       this.rentalService.isRentable(RentalModel).subscribe(
         (response) => {
-          this.router.navigate([
-            'cars/rental/payment/',
-            JSON.stringify(RentalModel),
-          ]);
-          this.toastr.success('Ödeme sayfasına yönlendiriliyorsunuz.');
+          this.rentalService.checkFindeksScore(RentalModel).subscribe(
+            (response) => {
+              this.router.navigate([
+                'cars/rental/payment/',
+                JSON.stringify(RentalModel),
+              ]);
+              this.toastr.success('Ödeme sayfasına yönlendiriliyorsunuz.');
+            },
+            (responseError) => {
+              this.toastrService.error(responseError.error.message, 'Hata');
+            }
+          );
         },
         (responseError) => {
           this.toastr.error(responseError.error.message, 'Hata');
@@ -142,15 +150,13 @@ export class RentalComponent implements OnInit {
     }
   }
 
-  // CheckStatus(carId: number) {
-  //   this.carService.getCarByCarId(carId).subscribe((response) => {
-  //     this.rentable = response.data[response.data.length - 1].status;
-  //   });
-  // }
-
   onChangeEvent(event: any) {
     this.minDate = event.target.value;
     this.firstDateSelected = true;
+  }
+
+  lastDateSelect() {
+    this.lastDateSelected = true;
   }
 
   calculateTotalPrice() {

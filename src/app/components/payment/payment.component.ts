@@ -13,6 +13,8 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { CarService } from 'src/app/services/car.service';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-payment',
@@ -31,11 +33,14 @@ export class PaymentComponent implements OnInit {
   };
   cards: CreditCard[];
   saveCard: boolean;
+  car: Car;
+  calculatedTotalPrice: number;
   paymentAddForm: FormGroup;
 
   constructor(
     private rentalService: RentalService,
     private paymentService: PaymentService,
+    private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private creditCardService: CreditCardService,
     private toastrService: ToastrService,
@@ -49,6 +54,12 @@ export class PaymentComponent implements OnInit {
         this.rental = JSON.parse(params['rental']);
         this.createPaymentAddForm();
         this.getCreditCardsByCustomerId(this.rental.customerId);
+        this.carService
+          .getCarByCarId(this.rental.carId)
+          .subscribe((response) => {
+            this.car = response.data[0];
+            this.calculateTotalPrice();
+          });
       }
     });
   }
@@ -59,7 +70,7 @@ export class PaymentComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       expirationDate: ['', Validators.required],
-      cVV: ['', Validators.required],
+      cvv: ['', Validators.required],
     });
   }
 
@@ -81,6 +92,8 @@ export class PaymentComponent implements OnInit {
         }
         this.router.navigate(['cars/']);
       });
+    } else {
+      this.toastrService.error('Lütfen bütün alanları doldurunuz');
     }
   }
 
@@ -118,5 +131,13 @@ export class PaymentComponent implements OnInit {
         this.card = this.cards[i];
       }
     }
+  }
+
+  calculateTotalPrice() {
+    var startDate = new Date(this.rental.rentDate);
+    var finishDate = new Date(this.rental.returnDate);
+    this.calculatedTotalPrice =
+      ((finishDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24) *
+      this.car.dailyPrice;
   }
 }

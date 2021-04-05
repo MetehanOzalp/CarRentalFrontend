@@ -66,17 +66,21 @@ export class PaymentComponent implements OnInit {
 
   createPaymentAddForm() {
     this.paymentAddForm = this.formBuilder.group({
+      customerId: [this.rental.customerId, Validators.required],
+      carId: [this.rental.carId, Validators.required],
       cardNumber: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       expirationDate: ['', Validators.required],
       cvv: ['', Validators.required],
+      amount: [0, Validators.required],
     });
   }
 
   addRental() {
     if (this.paymentAddForm.valid) {
       let paymentModel = Object.assign({}, this.paymentAddForm.value);
+      paymentModel.amount = this.calculatedTotalPrice;
       this.paymentService.addPayment(paymentModel).subscribe((response) => {
         this.toastrService.success(response.message, 'Başarılı');
         this.rentalService.addRental(this.rental).subscribe(
@@ -93,6 +97,7 @@ export class PaymentComponent implements OnInit {
         this.router.navigate(['cars/']);
       });
     } else {
+      console.log(this.paymentAddForm.value);
       this.toastrService.error('Lütfen bütün alanları doldurunuz');
     }
   }
@@ -139,5 +144,6 @@ export class PaymentComponent implements OnInit {
     this.calculatedTotalPrice =
       ((finishDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24) *
       this.car.dailyPrice;
+    return this.calculatedTotalPrice;
   }
 }

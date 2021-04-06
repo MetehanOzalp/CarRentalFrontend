@@ -6,6 +6,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -14,7 +15,7 @@ import { RentalComponent } from './components/rental/rental.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: CarComponent },
+  { path: '', pathMatch: 'full', component: HomepageComponent },
   { path: 'cars', component: CarComponent },
   { path: 'cars/brand/:brandId', component: CarComponent },
   { path: 'cars/color/:colorId', component: CarComponent },

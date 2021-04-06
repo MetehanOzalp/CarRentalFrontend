@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
           });
         },
         (responseError) => {
-          this.toastrService.error(responseError.error, 'Hata');
+          this.toastrService.error(responseError.error.message, 'Hata');
         }
       );
     } else {

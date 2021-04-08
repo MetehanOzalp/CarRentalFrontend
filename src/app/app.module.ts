@@ -29,6 +29,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     RegisterComponent,
     ProfileComponent,
     HomepageComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

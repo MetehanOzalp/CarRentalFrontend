@@ -1,97 +1,107 @@
-<div class="content">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header"><h5>Araç Güncelle</h5></div>
-      <div class="card-body">
-        <form [formGroup]="carUpdateForm">
-          <div class="mb-3">
-            <label for="carName">Araç adı</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="carName"
-                formControlName="carName"
-                class="form-control"
-                placeholder="Araç adı"
-              />
+<div class="container">
+  <div class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><h5>Araç Güncelle</h5></div>
+        <div class="card-body">
+          <form [formGroup]="carUpdateForm">
+            <div class="mb-3">
+              <label for="carName">Araç adı</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="carName"
+                  formControlName="carName"
+                  class="form-control"
+                  placeholder="Araç adı"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="brands">Marka</label>
-            <div class="form-group">
-              <select class="form-select" id="brands" formControlName="brandId">
-                <option value="">Marka seçiniz</option>
-                <option *ngFor="let brand of brands" [value]="brand.brandId">
-                  {{ brand.brandName }}
-                </option>
-              </select>
+            <div class="mb-3">
+              <label for="brands">Marka</label>
+              <div class="form-group">
+                <select
+                  class="form-select"
+                  id="brands"
+                  formControlName="brandId"
+                >
+                  <option value="">Marka seçiniz</option>
+                  <option *ngFor="let brand of brands" [value]="brand.brandId">
+                    {{ brand.brandName }}
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="colors">Renk</label>
-            <div class="form-group">
-              <select class="form-select" id="colors" formControlName="colorId">
-                <option value="">Renk seçiniz</option>
-                <option *ngFor="let color of colors" [value]="color.colorId">
-                  {{ color.colorName }}
-                </option>
-              </select>
+            <div class="mb-3">
+              <label for="colors">Renk</label>
+              <div class="form-group">
+                <select
+                  class="form-select"
+                  id="colors"
+                  formControlName="colorId"
+                >
+                  <option value="">Renk seçiniz</option>
+                  <option *ngFor="let color of colors" [value]="color.colorId">
+                    {{ color.colorName }}
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="modelYear">Model Yılı</label>
-            <div class="form-group">
-              <input
-                type="number"
-                id="modelYear"
-                formControlName="modelYear"
-                class="form-control"
-                placeholder="Model yılı"
-              />
+            <div class="mb-3">
+              <label for="modelYear">Model Yılı</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="modelYear"
+                  formControlName="modelYear"
+                  class="form-control"
+                  placeholder="Model yılı"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="dailyPrice">Günlük Fiyat</label>
-            <div class="form-group">
-              <input
-                type="number"
-                id="dailyPrice"
-                formControlName="dailyPrice"
-                class="form-control"
-                placeholder="Günlük fiyat"
-              />
+            <div class="mb-3">
+              <label for="dailyPrice">Günlük Fiyat</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="dailyPrice"
+                  formControlName="dailyPrice"
+                  class="form-control"
+                  placeholder="Günlük fiyat"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="descriptions">Açıklama</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="descriptions"
-                formControlName="descriptions"
-                class="form-control"
-                placeholder="Açıklama"
-              />
+            <div class="mb-3">
+              <label for="descriptions">Açıklama</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="descriptions"
+                  formControlName="descriptions"
+                  class="form-control"
+                  placeholder="Açıklama"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="findeksScore">Findeks Puanı</label>
-            <div class="form-group">
-              <input
-                type="number"
-                id="findeksScore"
-                formControlName="minFindeksScore"
-                class="form-control"
-                placeholder="Findeks Puanı"
-              />
+            <div class="mb-3">
+              <label for="findeksScore">Findeks Puanı</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="findeksScore"
+                  formControlName="minFindeksScore"
+                  class="form-control"
+                  placeholder="Findeks Puanı"
+                />
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="update()">
-          Güncelle
-        </button>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="update()">
+            Güncelle
+          </button>
+        </div>
       </div>
     </div>
   </div>

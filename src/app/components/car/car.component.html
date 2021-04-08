@@ -1,67 +1,69 @@
-<div class="row">
-  <div class="col-md-3">
-    <ul class="list-group" style="margin-top: 20px">
-      <li class="list-group-item"><app-car-filter></app-car-filter></li>
-    </ul>
-  </div>
-  <div class="col-md-9">
-    <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="list-group" style="margin-top: 20px">
+        <li class="list-group-item"><app-car-filter></app-car-filter></li>
+      </ul>
     </div>
-    <div style="margin-top: 20px" class="row" *ngIf="dataLoaded == true">
-      <div class="col-md-10">
-        <input
-          type="text"
-          [(ngModel)]="filterCarText"
-          class="form-control"
-          id="filterColorText"
-          placeholder="Araba adı giriniz"
-        />
-      </div>
-      <div
-        *ngFor="let car of cars | carFilter: filterCarText"
-        class="card"
-        style="width: 18rem"
-      >
-        <img
-          *ngIf="car.imagePath != null"
-          src="https://localhost:44326/{{ car.imagePath }}"
-          class="card-img-top"
-          style="height: 100%; width: 100%; object-fit: contain"
-          alt="..."
-        />
-        <img
-          *ngIf="car.imagePath == null"
-          src="https://localhost:44326/images/defaultCar.png"
-          class="card-img-top"
-          style="height: 100%; width: 100%; object-fit: contain"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ car.carName }}</h5>
+    <div class="col-md-9">
+      <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Marka: {{ car.brandName }}</li>
-          <li class="list-group-item">Renk: {{ car.colorName }}</li>
-          <li class="list-group-item">Model Yılı: {{ car.modelYear }}</li>
-          <li class="list-group-item">Fiyat: {{ car.dailyPrice }} ₺</li>
-          <li class="list-group-item">
-            Findeks Puanı: {{ car.minFindeksScore }}
-          </li>
-        </ul>
-        <section style="float: top">
-          <a routerLink="/cars/cardetail/{{ car.id }}" class="btn btn-primary"
-            >Detaylar</a
-          >
-          <a
-            routerLink="/cars/update/{{ car.id }}"
-            style="margin-top: -67px; margin-left: 173px; width: 90px"
-            class="btn btn-primary"
-            >Güncelle</a
-          >
-        </section>
+      </div>
+      <div style="margin-top: 20px" class="row" *ngIf="dataLoaded == true">
+        <div class="col-md-10">
+          <input
+            type="text"
+            [(ngModel)]="filterCarText"
+            class="form-control"
+            id="filterColorText"
+            placeholder="Araba adı giriniz"
+          />
+        </div>
+        <div
+          *ngFor="let car of cars | carFilter: filterCarText"
+          class="card"
+          style="width: 18rem; margin-right: 1rem; margin-top: 0.5rem"
+        >
+          <img
+            *ngIf="car.imagePath != null"
+            src="https://localhost:44326/{{ car.imagePath }}"
+            class="card-img-top"
+            style="height: 100%; width: 100%; object-fit: contain"
+            alt="..."
+          />
+          <img
+            *ngIf="car.imagePath == null"
+            src="https://localhost:44326/images/defaultCar.png"
+            class="card-img-top"
+            style="height: 100%; width: 100%; object-fit: contain"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ car.carName }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Marka: {{ car.brandName }}</li>
+            <li class="list-group-item">Renk: {{ car.colorName }}</li>
+            <li class="list-group-item">Model Yılı: {{ car.modelYear }}</li>
+            <li class="list-group-item">Fiyat: {{ car.dailyPrice }} ₺</li>
+            <li class="list-group-item">
+              Findeks Puanı: {{ car.minFindeksScore }}
+            </li>
+          </ul>
+          <section style="float: top">
+            <a routerLink="/cars/cardetail/{{ car.id }}" class="btn btn-primary"
+              >Detaylar</a
+            >
+            <a
+              routerLink="/cars/update/{{ car.id }}"
+              style="margin-top: -67px; margin-left: 173px; width: 90px"
+              class="btn btn-primary"
+              >Güncelle</a
+            >
+          </section>
+        </div>
       </div>
     </div>
   </div>

@@ -1,128 +1,130 @@
-<div class="content">
-  <div class="col-md-12">
-    <caption>
-      Ödeme İşlemleri
-    </caption>
-    <div class="icons">
-      <img src="https://img.icons8.com/color/48/000000/visa.png" />
-      <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
-      <img src="https://img.icons8.com/color/48/000000/maestro.png" />
-    </div>
-    <div class="card">
-      <div class="card-header"><h5>Kart Bilgileri</h5></div>
-      <div class="card-body">
-        <div class="mb-3">
-          <label>Kayıtlı Kartlar</label>
-          <select
-            (change)="cardSelectChangeHandler($event)"
-            class="form-select"
-            aria-label="Default select example"
-          >
-            <option selected>Kullanıcıya Ait Kayıtlı Kartlar</option>
-            <option *ngFor="let cards of cards" value="{{ cards.id }}">
-              Kayıtlı Kart Numaraları : {{ cards.cardNumber }}
-            </option>
-          </select>
-        </div>
-        <form [formGroup]="paymentAddForm">
-          <div class="mb-3">
-            <label for="cardNumber">Kart Numarası</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="cardNumber"
-                [(ngModel)]="card.cardNumber"
-                formControlName="cardNumber"
-                class="form-control"
-                placeholder="Kart Numarası"
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="firstName">Kart üzerindeki isim</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="firstName"
-                [(ngModel)]="card.firstName"
-                formControlName="firstName"
-                class="form-control"
-                placeholder="İsim"
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="lastName">Kart üzerindeki soyisim</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="lastName"
-                [(ngModel)]="card.lastName"
-                formControlName="lastName"
-                class="form-control"
-                placeholder="Soyisim"
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="cvv">CVV</label>
-            <div class="form-group">
-              <input
-                type="number"
-                id="cvv"
-                [(ngModel)]="card.cvv"
-                formControlName="cvv"
-                class="form-control"
-                placeholder="CVV"
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="expirationDate">Son Kullanım Tarihi</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="expirationDate"
-                [(ngModel)]="card.expirationDate"
-                formControlName="expirationDate"
-                class="form-control"
-                placeholder="Son Kullanım Tarihi"
-              />
-            </div>
-          </div>
-        </form>
+<div class="container">
+  <div class="content">
+    <div class="col-md-12">
+      <caption>
+        Ödeme İşlemleri
+      </caption>
+      <div class="icons">
+        <img src="https://img.icons8.com/color/48/000000/visa.png" />
+        <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+        <img src="https://img.icons8.com/color/48/000000/maestro.png" />
       </div>
-      <div class="card-footer">
-        <div class="checkbox mb-3">
-          <label>
-            <input
-              type="checkbox"
-              [(ngModel)]="saveCard"
-              id="saveCard"
-              name="saveCard"
-              value="saveCard"
-            />
-            Kartı Kaydet</label
-          >
+      <div class="card">
+        <div class="card-header"><h5>Kart Bilgileri</h5></div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label>Kayıtlı Kartlar</label>
+            <select
+              (change)="cardSelectChangeHandler($event)"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Kullanıcıya Ait Kayıtlı Kartlar</option>
+              <option *ngFor="let cards of cards" value="{{ cards.id }}">
+                Kayıtlı Kart Numaraları : {{ cards.cardNumber }}
+              </option>
+            </select>
+          </div>
+          <form [formGroup]="paymentAddForm">
+            <div class="mb-3">
+              <label for="cardNumber">Kart Numarası</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="cardNumber"
+                  [(ngModel)]="card.cardNumber"
+                  formControlName="cardNumber"
+                  class="form-control"
+                  placeholder="Kart Numarası"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="firstName">Kart üzerindeki isim</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="firstName"
+                  [(ngModel)]="card.firstName"
+                  formControlName="firstName"
+                  class="form-control"
+                  placeholder="İsim"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="lastName">Kart üzerindeki soyisim</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="lastName"
+                  [(ngModel)]="card.lastName"
+                  formControlName="lastName"
+                  class="form-control"
+                  placeholder="Soyisim"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="cvv">CVV</label>
+              <div class="form-group">
+                <input
+                  type="number"
+                  id="cvv"
+                  [(ngModel)]="card.cvv"
+                  formControlName="cvv"
+                  class="form-control"
+                  placeholder="CVV"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="expirationDate">Son Kullanım Tarihi</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="expirationDate"
+                  [(ngModel)]="card.expirationDate"
+                  formControlName="expirationDate"
+                  class="form-control"
+                  placeholder="Son Kullanım Tarihi"
+                />
+              </div>
+            </div>
+          </form>
         </div>
-        <button class="btn btn-fill btn-success" (click)="addRental()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-credit-card"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"
-            />
-            <path
-              d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"
-            />
-          </svg>
-          {{ calculatedTotalPrice | currency: "₺" }} Öde
-        </button>
+        <div class="card-footer">
+          <div class="checkbox mb-3">
+            <label>
+              <input
+                type="checkbox"
+                [(ngModel)]="saveCard"
+                id="saveCard"
+                name="saveCard"
+                value="saveCard"
+              />
+              Kartı Kaydet</label
+            >
+          </div>
+          <button class="btn btn-fill btn-success" (click)="addRental()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-credit-card"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"
+              />
+              <path
+                d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"
+              />
+            </svg>
+            {{ calculatedTotalPrice | currency: "₺" }} Öde
+          </button>
+        </div>
       </div>
     </div>
   </div>

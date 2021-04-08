@@ -97,7 +97,6 @@ export class PaymentComponent implements OnInit {
         this.router.navigate(['cars/']);
       });
     } else {
-      console.log(this.paymentAddForm.value);
       this.toastrService.error('Lütfen bütün alanları doldurunuz');
     }
   }

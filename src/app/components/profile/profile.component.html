@@ -1,77 +1,79 @@
-<div class="content">
-  <div class="col md-12">
-    <div class="card">
-      <div class="card-header"><h5>Kullanıcı Bilgileri</h5></div>
-      <div class="card-body">
-        <form [formGroup]="userUpdateForm">
-          <div class="mb-3">
-            <label for="firstName">Adınız</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="firstName"
-                formControlName="firstName"
-                class="form-control"
-                placeholder="{{ user.firstName }}"
-                [(ngModel)]="user.firstName"
-              />
+<div class="container">
+  <div class="content">
+    <div class="col md-12">
+      <div class="card">
+        <div class="card-header"><h5>Kullanıcı Bilgileri</h5></div>
+        <div class="card-body">
+          <form [formGroup]="userUpdateForm">
+            <div class="mb-3">
+              <label for="firstName">Adınız</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  class="form-control"
+                  placeholder="{{ user.firstName }}"
+                  [(ngModel)]="user.firstName"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="lastName">Soyadınız</label>
-            <div class="form-group">
-              <input
-                type="text"
-                id="lastName"
-                formControlName="lastName"
-                class="form-control"
-                placeholder="{{ user.lastName }}"
-                [(ngModel)]="user.lastName"
-              />
+            <div class="mb-3">
+              <label for="lastName">Soyadınız</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  class="form-control"
+                  placeholder="{{ user.lastName }}"
+                  [(ngModel)]="user.lastName"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="email">E-Mail</label>
-            <div class="form-group">
-              <input
-                type="email"
-                id="email"
-                formControlName="email"
-                class="form-control"
-                placeholder="{{ user.email }}"
-                [(ngModel)]="user.email"
-              />
+            <div class="mb-3">
+              <label for="email">E-Mail</label>
+              <div class="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                  placeholder="{{ user.email }}"
+                  [(ngModel)]="user.email"
+                />
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="password">Parola</label>
-            <div class="form-group">
-              <input
-                type="password"
-                id="password"
-                formControlName="password"
-                class="form-control"
-                placeholder="{{ user.password }}"
-                [(ngModel)]="user.password"
-              />
+            <div class="mb-3">
+              <label for="password">Parola</label>
+              <div class="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  formControlName="password"
+                  class="form-control"
+                  placeholder="{{ user.password }}"
+                  [(ngModel)]="user.password"
+                />
+              </div>
             </div>
+          </form>
+          <div class="mb-3">
+            <label for="findeksScore">Findeks Puanınız</label>
+            <input
+              type="number"
+              id="findeksScore"
+              disabled="true"
+              class="form-control"
+              [(ngModel)]="customer.findeksScore"
+            />
           </div>
-        </form>
-        <div class="mb-3">
-          <label for="findeksScore">Findeks Puanınız</label>
-          <input
-            type="number"
-            id="findeksScore"
-            disabled="true"
-            class="form-control"
-            [(ngModel)]="customer.findeksScore"
-          />
         </div>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="update()">
-          Bilgileri Güncelle
-        </button>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="update()">
+            Bilgileri Güncelle
+          </button>
+        </div>
       </div>
     </div>
   </div>

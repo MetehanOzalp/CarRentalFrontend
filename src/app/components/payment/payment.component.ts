@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
     expirationDate: '',
     cvv: 0,
   };
-  cards: CreditCard[];
+  cards: CreditCard[] = [];
   saveCard: boolean;
   car: Car;
   calculatedTotalPrice: number;
@@ -103,7 +103,7 @@ export class PaymentComponent implements OnInit {
 
   addCreditCard() {
     let newCreditCard: CreditCard = {
-      customerId: this.cards[0].customerId,
+      customerId: this.rental.customerId,
       cardNumber: this.card.cardNumber,
       firstName: this.card.firstName,
       lastName: this.card.lastName,

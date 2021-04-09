@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -54,7 +55,8 @@ export class RentalComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private localStorageService: LocalStorageService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -111,7 +113,7 @@ export class RentalComponent implements OnInit {
   }
 
   addRental() {
-    if (this.customer) {
+    if (this.authService.isAuthenticated()) {
       let RentalModel = {
         customerId: this.customer.id,
         carId: this.car.id,

@@ -1,9 +1,10 @@
 <div class="container">
-  <div class="content">
-    <div class="col-md-12">
-      <caption>
-        Ödeme İşlemleri
-      </caption>
+  <div
+    class="row justify-content-center align-items-center"
+    style="margin-top: 1rem"
+  >
+    <div class="col-md-6">
+      <h3>Ödeme İşlemleri</h3>
       <div class="icons">
         <img src="https://img.icons8.com/color/48/000000/visa.png" />
         <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
@@ -12,7 +13,7 @@
       <div class="card">
         <div class="card-header"><h5>Kart Bilgileri</h5></div>
         <div class="card-body">
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="cards.length > 0">
             <label>Kayıtlı Kartlar</label>
             <select
               (change)="cardSelectChangeHandler($event)"
@@ -65,30 +66,32 @@
                 />
               </div>
             </div>
-            <div class="mb-3">
-              <label for="cvv">CVV</label>
-              <div class="form-group">
-                <input
-                  type="number"
-                  id="cvv"
-                  [(ngModel)]="card.cvv"
-                  formControlName="cvv"
-                  class="form-control"
-                  placeholder="CVV"
-                />
+            <div class="row">
+              <div class="col-sm">
+                <label for="cvv">CVV</label>
+                <div class="form-group">
+                  <input
+                    type="number"
+                    id="cvv"
+                    [(ngModel)]="card.cvv"
+                    formControlName="cvv"
+                    class="form-control"
+                    placeholder="CVV"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="mb-3">
-              <label for="expirationDate">Son Kullanım Tarihi</label>
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="expirationDate"
-                  [(ngModel)]="card.expirationDate"
-                  formControlName="expirationDate"
-                  class="form-control"
-                  placeholder="Son Kullanım Tarihi"
-                />
+              <div class="col-sm">
+                <label for="expirationDate">Son Kullanım Tarihi</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="expirationDate"
+                    [(ngModel)]="card.expirationDate"
+                    formControlName="expirationDate"
+                    class="form-control"
+                    placeholder="Son Kullanım Tarihi"
+                  />
+                </div>
               </div>
             </div>
           </form>

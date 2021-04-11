@@ -59,6 +59,8 @@ export class ProfileComponent implements OnInit {
   update() {
     if (this.userUpdateForm.valid) {
       let userModel = Object.assign({}, this.userUpdateForm.value);
+      userModel.id = this.user.id;
+      console.log(userModel);
       this.userService.update(userModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');

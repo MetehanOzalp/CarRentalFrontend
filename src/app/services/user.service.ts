@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListResponseModel } from '../models/listResponseModel';
+import { OperationClaim } from '../models/operationClaim';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { User } from '../models/user';
@@ -21,5 +23,10 @@ export class UserService {
   getUserByMail(email: string): Observable<SingleResponseModel<User>> {
     let newPath = this.apiUrl + 'users/getbyemail?email=' + email;
     return this.httpClient.get<SingleResponseModel<User>>(newPath);
+  }
+
+  getUserClaims(user: User): Observable<ListResponseModel<OperationClaim>> {
+    let newPath = this.apiUrl + 'users/getuserclaims?userId=' + user.id;
+    return this.httpClient.get<ListResponseModel<OperationClaim>>(newPath);
   }
 }

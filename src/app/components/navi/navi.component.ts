@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
+import { OperationClaim } from 'src/app/models/operationClaim';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -19,6 +20,7 @@ export class NaviComponent implements OnInit {
     email: '',
     password: '',
   };
+  userClaims: OperationClaim[] = [];
   constructor(
     private localStorageService: LocalStorageService,
     private authService: AuthService,
@@ -33,6 +35,15 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  isAdmin() {
+    for (let i = 0; i < this.userClaims.length; i++) {
+      if (this.userClaims[i].name == 'admin') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   checkAuthenticated() {
     this.isAuthenticated = this.authService.isAuthenticated();
   }
@@ -42,7 +53,14 @@ export class NaviComponent implements OnInit {
       .getUserByMail(this.localStorageService.get('email'))
       .subscribe((response) => {
         this.user = response.data;
+        this.getUserClaims(this.user);
       });
+  }
+
+  getUserClaims(user: User) {
+    this.userService.getUserClaims(user).subscribe((response) => {
+      this.userClaims = response.data;
+    });
   }
 
   signOut() {

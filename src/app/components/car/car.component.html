@@ -26,6 +26,13 @@
           />
         </div>
         <div
+          *ngIf="filterCarText"
+          class="alert alert-success"
+          style="margin-top: 1rem"
+        >
+          <b>{{ filterCarText }}</b> için arama sonuçları
+        </div>
+        <div
           *ngFor="let car of cars | carFilter: filterCarText"
           class="card"
           style="width: 18rem; margin-right: 0.5rem; margin-top: 0.5rem"

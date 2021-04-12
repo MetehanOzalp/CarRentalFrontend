@@ -28,7 +28,11 @@ const routes: Routes = [
     component: PaymentComponent,
     canActivate: [LoginGuard],
   },
-  { path: 'cars/add', component: CarAddComponent, canActivate: [LoginGuard] },
+  {
+    path: 'cars/add',
+    component: CarAddComponent,
+    canActivate: [LoginGuard],
+  },
   {
     path: 'colors/add',
     component: ColorAddComponent,

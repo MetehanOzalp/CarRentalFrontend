@@ -1,6 +1,10 @@
 html,
 body {
+  background-image: url("http://sbt.com.tr/wp-content/uploads/bac-22-nd.png");
   height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {

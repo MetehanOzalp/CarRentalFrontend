@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private localStorageService: LocalStorageService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -46,6 +48,22 @@ export class LoginComponent implements OnInit {
           this.toastrService.success(response.message, 'Başarılı');
           this.localStorageService.set('token', response.data.token);
           this.localStorageService.set('email', loginModel.email);
+          this.userService
+            .getUserByMail(this.localStorageService.get('email'))
+            .subscribe((response) => {
+              this.userService
+                .getUserClaims(response.data)
+                .subscribe((response) => {
+                  for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].name == 'admin') {
+                      this.localStorageService.set(
+                        'admin',
+                        response.data[i].name
+                      );
+                    }
+                  }
+                });
+            });
           timer(25).subscribe((p) => {
             window.location.href = '/';
           });

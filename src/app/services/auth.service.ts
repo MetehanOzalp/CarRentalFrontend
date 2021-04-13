@@ -43,4 +43,12 @@ export class AuthService {
       return false;
     }
   }
+
+  isAdmin() {
+    if (this.localStorageService.get('admin')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

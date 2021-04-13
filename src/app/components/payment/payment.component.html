@@ -97,17 +97,19 @@
           </form>
         </div>
         <div class="card-footer">
-          <div class="checkbox mb-3">
-            <label>
+          <div class="check">
+            <div class="form-check form-switch">
               <input
-                type="checkbox"
                 [(ngModel)]="saveCard"
-                id="saveCard"
-                name="saveCard"
-                value="saveCard"
+                class="form-check-input"
+                type="checkbox"
+                id="isChecked"
+                checked
               />
-              Kartı Kaydet</label
-            >
+              <label class="form-check-label" for="isChecked"
+                >Kartımı kaydet</label
+              >
+            </div>
           </div>
           <button class="btn btn-fill btn-success" (click)="addRental()">
             <svg

@@ -55,12 +55,7 @@ export class LoginComponent implements OnInit {
                 .getUserClaims(response.data)
                 .subscribe((response) => {
                   for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].name == 'admin') {
-                      this.localStorageService.set(
-                        'admin',
-                        response.data[i].name
-                      );
-                    }
+                    this.localStorageService.set('role', response.data[i].name);
                   }
                 });
             });

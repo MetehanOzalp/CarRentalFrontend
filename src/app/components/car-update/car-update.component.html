@@ -13,7 +13,7 @@
                   id="carName"
                   formControlName="carName"
                   class="form-control"
-                  placeholder="Araç adı"
+                  [(ngModel)]="car.carName"
                 />
               </div>
             </div>
@@ -55,7 +55,7 @@
                   id="modelYear"
                   formControlName="modelYear"
                   class="form-control"
-                  placeholder="Model yılı"
+                  [(ngModel)]="car.modelYear"
                 />
               </div>
             </div>
@@ -67,7 +67,7 @@
                   id="dailyPrice"
                   formControlName="dailyPrice"
                   class="form-control"
-                  placeholder="Günlük fiyat"
+                  [(ngModel)]="car.dailyPrice"
                 />
               </div>
             </div>
@@ -79,7 +79,7 @@
                   id="descriptions"
                   formControlName="descriptions"
                   class="form-control"
-                  placeholder="Açıklama"
+                  [(ngModel)]="car.descriptions"
                 />
               </div>
             </div>
@@ -91,7 +91,7 @@
                   id="findeksScore"
                   formControlName="minFindeksScore"
                   class="form-control"
-                  placeholder="Findeks Puanı"
+                  [(ngModel)]="car.minFindeksScore"
                 />
               </div>
             </div>

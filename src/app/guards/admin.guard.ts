@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, timer } from 'rxjs';
+import { combineLatest, Observable, timer } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.isAdmin()) {
+    if (this.authService.haveRole('admin')) {
       return true;
     } else {
       this.router.navigate(['/']);

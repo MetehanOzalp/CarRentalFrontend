@@ -12,6 +12,7 @@ import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { ColorService } from 'src/app/services/color.service';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-car-update',
@@ -21,6 +22,18 @@ import { ColorService } from 'src/app/services/color.service';
 export class CarUpdateComponent implements OnInit {
   carUpdateForm: FormGroup;
   carId: number;
+  car: Car = {
+    id: 0,
+    brandName: '',
+    carName: '',
+    colorName: '',
+    dailyPrice: 0,
+    descriptions: '',
+    imagePath: '',
+    minFindeksScore: 0,
+    modelYear: 0,
+    status: false,
+  };
   brands: Brand[] = [];
   colors: Color[] = [];
 
@@ -38,6 +51,7 @@ export class CarUpdateComponent implements OnInit {
       if (params['carId']) {
         this.carId = parseInt(params['carId']);
         this.createCarUpdateForm();
+        this.getCar(params['carId']);
         this.getBrands();
         this.getColors();
       }
@@ -80,6 +94,12 @@ export class CarUpdateComponent implements OnInit {
     } else {
       this.toastrService.error('Araç bilgileri eksik', 'Hata');
     }
+  }
+
+  getCar(carId: number) {
+    this.carService.getCarByCarId(carId).subscribe((response) => {
+      this.car = response.data[0];
+    });
   }
 
   getBrands() {

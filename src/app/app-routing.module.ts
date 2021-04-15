@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { BrandComponent } from './components/brand/brand.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
@@ -18,6 +19,7 @@ import { LoginGuard } from './guards/login.guard';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
   { path: 'cars', component: CarComponent },
+  { path: 'brands', component: BrandComponent },
   { path: 'cars/brand/:brandId', component: CarComponent },
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/cardetail/:id', component: CarDetailComponent },
@@ -32,22 +34,22 @@ const routes: Routes = [
   {
     path: 'cars/add',
     component: CarAddComponent,
-    canActivate: [LoginGuard, AdminGuard],
+    canActivate: [AdminGuard, LoginGuard],
   },
   {
     path: 'colors/add',
     component: ColorAddComponent,
-    canActivate: [LoginGuard, AdminGuard],
+    canActivate: [AdminGuard, LoginGuard],
   },
   {
     path: 'brands/add',
     component: BrandAddComponent,
-    canActivate: [LoginGuard, AdminGuard],
+    canActivate: [AdminGuard, LoginGuard],
   },
   {
     path: 'cars/update/:carId',
     component: CarUpdateComponent,
-    canActivate: [LoginGuard, AdminGuard],
+    canActivate: [AdminGuard, LoginGuard],
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

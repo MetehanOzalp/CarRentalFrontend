@@ -6,7 +6,7 @@ export interface Car {
   modelYear: number;
   dailyPrice: number;
   imagePath: string;
-  description: string;
+  descriptions: string;
   minFindeksScore: number;
   status: boolean;
 }

@@ -44,8 +44,8 @@ export class AuthService {
     }
   }
 
-  isAdmin() {
-    if (this.localStorageService.get('admin')) {
+  haveRole(role: string) {
+    if (this.localStorageService.get('role') == role) {
       return true;
     } else {
       return false;

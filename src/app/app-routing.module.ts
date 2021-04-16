@@ -4,6 +4,7 @@ import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
+import { CarImageAddComponent } from './components/car-image-add/car-image-add.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'cars/add',
     component: CarAddComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
+  {
+    path: 'cars/image/add/:carId',
+    component: CarImageAddComponent,
     canActivate: [AdminGuard, LoginGuard],
   },
   {

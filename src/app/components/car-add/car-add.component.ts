@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Color } from 'src/app/models/color';
@@ -21,13 +22,15 @@ export class CarAddComponent implements OnInit {
   carAddForm: FormGroup;
   brands: Brand[] = [];
   colors: Color[] = [];
+  carId: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private carService: CarService,
     private brandService: BrandService,
     private colorService: ColorService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,13 +53,16 @@ export class CarAddComponent implements OnInit {
 
   add() {
     if (this.carAddForm.valid) {
-      console.log(this.carAddForm.value);
       let carModel = Object.assign({}, this.carAddForm.value);
       carModel.brandId = Number(carModel.brandId);
       carModel.colorId = Number(carModel.colorId);
       this.carService.add(carModel).subscribe(
         (response) => {
           this.toastrService.success(response.message), 'Başarılı';
+          this.carService.getCars().subscribe((response) => {
+            this.carId = response.data[response.data.length - 1].id;
+            this.router.navigate(['/cars/image/add/' + this.carId]);
+          });
         },
         (responseError) => {
           if (responseError.error.Errors.length > 0) {
@@ -70,7 +76,6 @@ export class CarAddComponent implements OnInit {
         }
       );
     } else {
-      console.log(this.carAddForm.value);
       this.toastrService.error('Araç bilgileri eksik', 'Hata');
     }
   }

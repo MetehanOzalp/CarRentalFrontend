@@ -1,0 +1,33 @@
+<div class="container">
+  <div
+    class="row justify-content-center align-items-center"
+    style="margin-top: 1rem; margin-bottom: 1rem"
+  >
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header"><h5>Araç Resmi Ekle</h5></div>
+        <div class="card-body">
+          <form [formGroup]="carImageAddForm">
+            <div class="mb-3">
+              <label for="descriptions">Açıklama</label>
+              <div class="form-group">
+                <input
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  name="name"
+                  multiple
+                /><br /><br />
+                Eklemek istediğiniz resmi seçiniz.<br />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="addImage()">
+            Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

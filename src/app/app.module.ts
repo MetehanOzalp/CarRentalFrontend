@@ -31,6 +31,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { CarImageAddComponent } from './components/car-image-add/car-image-add.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -59,6 +60,7 @@ export function tokenGetter() {
     ProfileComponent,
     HomepageComponent,
     FooterComponent,
+    CarImageAddComponent,
   ],
   imports: [
     BrowserModule,

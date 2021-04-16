@@ -6,17 +6,21 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
-import { combineLatest, Observable, timer } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
+  token: any;
+  roles: any[] = [];
   constructor(
-    private authService: AuthService,
     private toastrService: ToastrService,
+    private jwtHelper: JwtHelperService,
+    private localStorageService: LocalStorageService,
     private router: Router
   ) {}
   canActivate(
@@ -27,8 +31,25 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.haveRole('admin')) {
-      return true;
+    if (this.localStorageService.get('token')) {
+      this.token = this.localStorageService.get('token');
+      let decodedToken = this.jwtHelper.decodeToken(this.token);
+      this.roles =
+        decodedToken[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ];
+    } else {
+      return false;
+    }
+    if (this.roles != undefined) {
+      for (let i = 0; i < this.roles.length; i++) {
+        if (this.roles[i] == 'admin') {
+          return true;
+        }
+      }
+      this.router.navigate(['/']);
+      this.toastrService.error('Yetki yok');
+      return false;
     } else {
       this.router.navigate(['/']);
       this.toastrService.error('Yetki yok');

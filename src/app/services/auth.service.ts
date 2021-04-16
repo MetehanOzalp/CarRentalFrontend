@@ -43,12 +43,4 @@ export class AuthService {
       return false;
     }
   }
-
-  haveRole(role: string) {
-    if (this.localStorageService.get('role') == role) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

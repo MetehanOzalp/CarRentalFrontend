@@ -48,17 +48,6 @@ export class LoginComponent implements OnInit {
           this.toastrService.success(response.message, 'Başarılı');
           this.localStorageService.set('token', response.data.token);
           this.localStorageService.set('email', loginModel.email);
-          this.userService
-            .getUserByMail(this.localStorageService.get('email'))
-            .subscribe((response) => {
-              this.userService
-                .getUserClaims(response.data)
-                .subscribe((response) => {
-                  for (let i = 0; i < response.data.length; i++) {
-                    this.localStorageService.set('role', response.data[i].name);
-                  }
-                });
-            });
           timer(25).subscribe((p) => {
             window.location.href = '/';
           });

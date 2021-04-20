@@ -18,7 +18,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
 export class CarImageAddComponent implements OnInit {
   carImageAddForm: FormGroup;
   carId: number;
-  selectedFile: File;
+  selectedFile: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,8 +45,14 @@ export class CarImageAddComponent implements OnInit {
   addImage() {
     if (this.carImageAddForm.valid) {
       const formData = new FormData();
-      formData.append('CarId', this.carImageAddForm.get('carId').value);
-      formData.append('Image', this.selectedFile, this.selectedFile.name);
+      for (let i = 0; i < this.selectedFile.length; i++) {
+        formData.append('CarId', this.carImageAddForm.get('carId').value);
+        formData.append(
+          'Image',
+          this.selectedFile[i],
+          this.selectedFile[i].name
+        );
+      }
       this.carImageService.addImage(formData).subscribe((response) => {
         this.toastrService.success(response.message);
       });
@@ -54,11 +60,13 @@ export class CarImageAddComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = <File>event.target.files[0];
-    const file = (event.target as HTMLInputElement).files[0];
-    this.carImageAddForm.patchValue({
-      imagePath: file,
-    });
-    this.carImageAddForm.get('imagePath').updateValueAndValidity();
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.selectedFile[i] = <File>event.target.files[i];
+      const file = (event.target as HTMLInputElement).files[i];
+      this.carImageAddForm.patchValue({
+        imagePath: file,
+      });
+      this.carImageAddForm.get('imagePath').updateValueAndValidity();
+    }
   }
 }

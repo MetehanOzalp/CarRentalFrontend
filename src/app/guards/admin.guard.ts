@@ -42,10 +42,8 @@ export class AdminGuard implements CanActivate {
       return false;
     }
     if (this.roles != undefined) {
-      for (let i = 0; i < this.roles.length; i++) {
-        if (this.roles[i] == 'admin') {
-          return true;
-        }
+      if (this.roles.indexOf('admin') != -1) {
+        return true;
       }
       this.router.navigate(['/']);
       this.toastrService.error('Yetki yok');

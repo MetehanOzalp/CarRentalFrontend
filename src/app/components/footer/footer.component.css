@@ -37,7 +37,7 @@
 }
 
 .footer-dark .item.text {
-  margin-bottom: 36px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 767px) {
@@ -70,7 +70,6 @@
   display: inline-block;
   text-align: center;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
   margin: 0 8px;
   color: #fff;
   opacity: 0.75;

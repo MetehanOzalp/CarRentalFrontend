@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row" style="margin-top: 20px; margin-bottom: 1rem">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Adı</th>
+          <th scope="col">Soyadı</th>
+          <th scope="col">E-Mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              type="button"
+              class="btn btn-primary text-center"
+              (click)="selectedUser(user.id)"
+            >
+              Yetki ver
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Yetkilendirme</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <select class="form-select" id="claims" [(ngModel)]="selectedClaimId">
+          <option value="0">Yetki seçiniz</option>
+          <option *ngFor="let claim of claims" [value]="claim.id">
+            {{ claim.name }}
+          </option>
+        </select>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Kapat
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addAuthorization()"
+          >
+            Yetki ver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

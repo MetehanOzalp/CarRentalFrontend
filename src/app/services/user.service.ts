@@ -15,6 +15,11 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getAll(): Observable<ListResponseModel<User>> {
+    let newPath = this.apiUrl + 'users/getall';
+    return this.httpClient.get<ListResponseModel<User>>(newPath);
+  }
+
   update(userModel: User): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'users/update';
     return this.httpClient.post<ResponseModel>(newPath, userModel);

@@ -50,12 +50,20 @@
         ></button>
       </div>
       <div class="modal-body">
-        <select class="form-select" id="claims" [(ngModel)]="selectedClaimId">
-          <option value="0">Yetki seçiniz</option>
-          <option *ngFor="let claim of claims" [value]="claim.id">
-            {{ claim.name }}
-          </option>
-        </select>
+        <form [formGroup]="claimAddForm">
+          <div class="form-group">
+            <select
+              class="form-select"
+              id="claims"
+              formControlName="operationClaimId"
+            >
+              <option value="">Yetki seçiniz</option>
+              <option *ngFor="let claim of claims" [value]="claim.id">
+                {{ claim.name }}
+              </option>
+            </select>
+          </div>
+        </form>
         <div class="modal-footer">
           <button
             type="button"

@@ -14,7 +14,7 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalComponent } from './components/rental/rental.component';
-import { UserComponent } from './components/user/user.component';
+import { UserAuthorizationComponent } from './components/user-authorization/user-authorization.component';
 import { AdminGuard } from './guards/admin.guard';
 import { LoginGuard } from './guards/login.guard';
 
@@ -28,7 +28,11 @@ const routes: Routes = [
   { path: 'cars/brand/:brandId/color/:colorId', component: CarComponent },
   { path: 'cars/filter/:brandId/:colorId', component: CarComponent },
   { path: 'rental/:carId', component: RentalComponent },
-  { path: 'users', component: UserComponent },
+  {
+    path: 'userAuthorization',
+    component: UserAuthorizationComponent,
+    canActivate: [AdminGuard, LoginGuard],
+  },
   {
     path: 'cars/rental/payment/:rental',
     component: PaymentComponent,
